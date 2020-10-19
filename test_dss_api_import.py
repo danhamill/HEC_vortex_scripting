@@ -8,4 +8,12 @@ try:
     from hec.heclib.dss import HecDss
     print 'Sucessfully found DSS API'
 except:
-    print 'import failed'
+    print 'import from DSS failed'
+
+try:
+    from mil.army.usace.hec.vortex.io import BatchImporter
+    from mil.army.usace.hec.vortex import Options
+    from mil.army.usace.hec.vortex.geo import WktFactory
+    print 'Sucessfully found vortex API'
+except:
+    print 'import from vortex failed'
