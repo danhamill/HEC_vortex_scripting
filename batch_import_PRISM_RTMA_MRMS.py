@@ -55,19 +55,19 @@ for wy in [16,17,18,19,20]:
             in_files = glob(files[wy] + os.sep + exts[ds])
             print 'Found' + ' ' + str(len(in_files)) + ' Files'
             variables = [var_names[ds]]
-            for i in in_files:
-                geo_options = Options.create()
-                geo_options.add('pathToShp', clip_shp)
-                geo_options.add('targetCellSize', '2000')
-                geo_options.add('targetWkt', WktFactory.shg())
-                geo_options.add('resamplingMethod', 'bilinear')
 
-                destination = dss_file
+            geo_options = Options.create()
+            geo_options.add('pathToShp', clip_shp)
+            geo_options.add('targetCellSize', '2000')
+            geo_options.add('targetWkt', WktFactory.shg())
+            geo_options.add('resamplingMethod', 'bilinear')
 
-                write_options = Options.create()
-                write_options.add('partF', ds)
-                write_options.add('partA', 'SHG')
-                write_options.add('partB', basin)
-                myImport = BatchImporter.builder().inFiles([i]).variables(variables).geoOptions(geo_options).destination(destination).writeOptions(write_options).build()
+            destination = dss_file
 
-                myImport.process()
+            write_options = Options.create()
+            write_options.add('partF', ds)
+            write_options.add('partA', 'SHG')
+            write_options.add('partB', basin)
+            myImport = BatchImporter.builder().inFiles(in_files).variables(variables).geoOptions(geo_options).destination(destination).writeOptions(write_options).build()
+
+            myImport.process()
